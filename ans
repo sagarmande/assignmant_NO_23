@@ -1,0 +1,92 @@
+Let's go through each of these code examples one by one and explain the results:
+
+1. 
+```python
+>>> def func(a, b=6, c=8):
+...     print(a, b, c)
+>>> func(1, 2)
+```
+
+Result:
+```
+1 2 8
+```
+
+In this function, `a` is assigned the value `1`, `b` is assigned the value `2`, and `c` takes its default value of `8`. When you call `func(1, 2)`, you're explicitly passing values for `a` and `b`, but not for `c`, so it uses the default value of `8` for `c`.
+
+2. 
+```python
+>>> def func(a, b, c=5):
+...     print(a, b, c)
+>>> func(1, c=3, b=2)
+```
+
+Result:
+```
+1 2 3
+```
+
+In this function, you're passing values for all three parameters: `a` is `1`, `b` is `2`, and `c` is explicitly set to `3`. The order of keyword arguments doesn't matter, so `b=2` and `c=3` override the default values of `b` and `c`.
+
+3. 
+```python
+>>> def func(a, *pargs):
+...     print(a, pargs)
+>>> func(1, 2, 3)
+```
+
+Result:
+```
+1 (2, 3)
+```
+
+In this function, `a` is assigned the value `1`, and `*pargs` collects any additional positional arguments into a tuple called `pargs`. So when you call `func(1, 2, 3)`, `a` is `1`, and `pargs` contains `(2, 3)`.
+
+4. 
+```python
+>>> def func(a, **kargs):
+...     print(a, kargs)
+>>> func(a=1, c=3, b=2)
+```
+
+Result:
+```
+1 {'c': 3, 'b': 2}
+```
+
+In this function, `a` is assigned the value `1`, and `**kargs` collects any additional keyword arguments into a dictionary called `kargs`. When you call `func(a=1, c=3, b=2)`, `a` is `1`, and `kargs` contains `{'c': 3, 'b': 2}`.
+
+5. 
+```python
+>>> def func(a, b, c=8, d=5):
+...     print(a, b, c, d)
+>>> func(1, *(5, 6))
+```
+
+Result:
+```
+1 5 6 5
+```
+
+In this function, `a` is assigned the value `1`, `b` is assigned the first value in the tuple `(5, 6)`, which is `5`, and `c` and `d` take their default values of `8` and `5`, respectively.
+
+6. 
+```python
+>>> def func(a, b, c):
+...     a = 2
+...     b[0] = 'x'
+...     c['a'] = 'y'
+>>> l = 1
+>>> m = [1]
+>>> n = {'a': 0}
+>>> func(l, m, n)
+>>> print(l, m, n)
+```
+
+Result:
+```
+1 ['x'] {'a': 'y'}
+1 ['x'] {'a': 'y'}
+```
+
+In this function, you're modifying the values of the parameters `a`, `b`, and `c` within the function. `a` is set to `2`, `b[0]` is set to `'x'`, and `c['a']` is set to `'y'`. Since lists and dictionaries are mutable, the changes made to `b` and `c` persist outside of the function as well. Therefore, when you print the values of `l`, `m`, and `n` after calling the function, you see the modified values.
